@@ -3,64 +3,51 @@ import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
     return (
-        <nav className="w-full sticky bg-gradient-to-r from-[#0f172a] to-[#020617] border-b border-white/10">
-            <div className=" mx-auto">
-                <div className="flex items-center justify-between h-16">
-
-                    {/* Left Section */}
-                    <div className="flex items-center gap-10">
-                        {/* Logo */}
-                        <div className="flex items-center gap-2 text-white font-semibold text-2xl">
-                            
-                            <span className="px-4">Cooking Sooking</span>
-                        </div>
-
-                        {/* Menu */}
-                        <ul className="flex items-center gap-8 text-gray-300 text-lg">
-                            <li>
-                                <NavLink to="/" className={({ isActive }) => isActive ? "text-white border-b-2 border-indigo-500 pb-1 cursor-pointer" : "hover:text-white cursor-pointer"}>
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/about" className={({ isActive }) => isActive ? "text-white border-b-2 border-indigo-500 pb-1 cursor-pointer" : "hover:text-white cursor-pointer"}>
-                                    About us
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/recipes" className={({ isActive }) => isActive ? "text-white border-b-2 border-indigo-500 pb-1 cursor-pointer" : "hover:text-white cursor-pointer"}>
-                                    Recipes
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/contact" className={({ isActive }) => isActive ? "text-white border-b-2 border-indigo-500 pb-1 cursor-pointer" : "hover:text-white cursor-pointer"}>
-                                    Contact us
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Right Section */}
-                    <div className="flex items-center gap-5">
-                        {/* Search */}
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg w-4 h-4" />
-                            <input
-                                type="text"
-                                placeholder="Search"
-                                className="bg-[#020617] text-sm text-white pl-9 pr-3 py-2 rounded-md border border-white/10 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            />
-                        </div>
-
-                        {/* Notification */}
-                        <Bell className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer" />
-
-                        {/* Profile */}
-
-                    </div>
-
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div className="container-fluid">
+                <NavLink className="navbar-brand" to="/">Cooking sooking</NavLink>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} aria-current="page">Home</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>About us</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Download App</a>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Contact us</NavLink>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuisines</a>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <a className="dropdown-item" href="#">Indian</a>
+                                </li>
+                                <li>
+                                    <a className="dropdown-item" href="#">Chinese</a>
+                                </li>
+                                <li>
+                                    <hr className="dropdown-divider" />
+                                </li>
+                                <li>
+                                    <a className="dropdown-item" href="#">see all..</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form className="d-flex" role="search">
+                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button className="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
+
     );
 }

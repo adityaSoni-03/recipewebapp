@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/home.jsx';
 import Contact from './pages/contact.jsx';
 import About from './pages/about.jsx';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
 
 function App() {
   return (
