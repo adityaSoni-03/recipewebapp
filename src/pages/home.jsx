@@ -41,7 +41,7 @@ function Home() {
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
-            <h1 className="text-center">Select from a range of recipes</h1>
+            <h1 className="text-center">Most popuplar</h1>
             <div className="album py-5 bg-body-tertiary">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -87,6 +87,63 @@ function Home() {
                                 </div>
                             </div>
                         </div>
+                        <div className="col">
+                            <div className="card shadow-sm">
+                                <img src="../public/photos/home1.jpg" className="card-img-top" alt="Pizza" />
+                                <div className="card-body">
+                                    <p className="card-text">Check out this delicious italian-style pizza recipe which is same as the first pizza ever made.</p>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <div className="btn-group">
+                                            <button type="button" className="btn btn-sm btn-outline-secondary">Lets cook!</button>
+                                        </div>
+                                        <small className="text-body-secondary"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="card shadow-sm">
+                                <img src="../public/photos/home2.jpg" className="card-img-top" alt="Pizza" />
+                                <div className="card-body">
+                                    <p className="card-text">Check out this delicious italian-style pizza recipe which is same as the first pizza ever made.</p>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <div className="btn-group">
+                                            <button type="button" className="btn btn-sm btn-outline-secondary">Lets cook!</button>
+                                        </div>
+                                        <small className="text-body-secondary"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="card shadow-sm">
+                                <img src="../public/photos/home3.jpg" className="card-img-top" alt="Pizza" />
+                                <div className="card-body">
+                                    <p className="card-text">Check out this delicious italian-style pizza recipe which is same as the first pizza ever made.</p>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <div className="btn-group">
+                                            <button type="button" className="btn btn-sm btn-outline-secondary">Lets cook!</button>
+                                        </div>
+                                        <small className="text-body-secondary"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="card shadow-sm">
+                                <img src="../public/photos/home4.jpg" className="card-img-top" alt="Pizza" />
+                                <div className="card-body">
+                                    <p className="card-text">Check out this delicious italian-style pizza recipe which is same as the first pizza ever made.</p>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <div className="btn-group">
+                                            <button type="button" className="btn btn-sm btn-outline-secondary">Lets cook!</button>
+                                        </div>
+                                        <small className="text-body-secondary"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+
                     </div>
                 </div>
             </div>

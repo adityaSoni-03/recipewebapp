@@ -1,7 +1,10 @@
 import { Search, Bell } from "lucide-react";
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Navbar() {
+    const navigate=useNavigate();
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -17,9 +20,7 @@ export default function Navbar() {
                         <li className="nav-item">
                             <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>About us</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Download App</a>
-                        </li>
+                        
                         <li className="nav-item">
                             <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Contact us</NavLink>
                         </li>
@@ -41,6 +42,7 @@ export default function Navbar() {
                             </ul>
                         </li>
                     </ul>
+                    <button type="button" className="btn btn-primary" onClick={()=>navigate('/login ')}>Login</button>
                     <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit">Search</button>
