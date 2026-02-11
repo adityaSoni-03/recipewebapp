@@ -1,8 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import '../login.css'
+import { useAuth } from '../context/AuthContext.jsx'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 function Login() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const navigate = useNavigate();
+    const { login } = useAuth()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                // update auth context (also persists to localStorage)
+                login(data.token, data.user || { email })
+                toast.success("Logged in successfully!!")
+                // redirect
+                navigate("/");
+            } else {
+                toast.error(data.error || "Invalid credentials");
+            }
+
+        } catch (err) {
+            console.error("Login error:", err);
+            toast.error("Oops! Something went wrong");
+        }
+    };
+
+
     return (
         <div className="d-flex align-items-center py-4 bg-body-tertiary">
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={true}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Bounce}
+            ></ToastContainer>
             <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
                 <symbol id="check2" viewBox="0 0 16 16">
                     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
@@ -62,19 +115,22 @@ function Login() {
                 </ul>
             </div>
             <main className="form-signin w-100 m-auto">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <h1 className="h3 mb-3 fw-normal">Please log in</h1>
                     <div className="form-floating">
-                        <input name="username" type="text" className="form-control" id="floatingInput" placeholder="Enter your username" />
-                        <label htmlFor="floatingInput">Username</label>
+                        <input name="username" type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput" placeholder="Enter your username" />
+                        <label htmlFor="floatingInput">Email</label>
                     </div>
                     <div className="form-floating">
-                        <input type="password" name="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                        <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="floatingPassword" placeholder="Password" />
                         <label htmlFor="floatingPassword">Password</label>
                     </div>
                     <div className="form-check text-start my-3">
                         <input className="form-check-input" type="checkbox" value="remember-me" id="checkDefault" />
                         <label className="form-check-label" htmlFor="checkDefault">Remember me</label>
+                    </div>
+                    <div>
+                        Not registered? <a href="/register">Create an account</a>
                     </div>
                     <button className="btn btn-primary w-100 py-2" type="submit">Log in</button>
                     <p className="mt-5 mb-3 text-body-secondary">© 2025–2025</p>

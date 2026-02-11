@@ -15,13 +15,13 @@ function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("http://127.0.0.1:8000/api/contact/"), {
+        fetch("http://127.0.0.1:8000/api/contact/", {
             method: 'POST',
             header: {
                 "Content-Type": "application/json",
-            },
+            },  
             body: JSON.stringify(form)
-        }
+        })
             .then((res) => res.json())
             .then(data => {
                 alert(data.message);

@@ -1,4 +1,4 @@
-export default function ProductCard({ image, title, description, variant, price }) {
+export default function ProductCard({ image, title, description,user,cook_time }) {
   return (
     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition">
       
