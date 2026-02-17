@@ -8,7 +8,7 @@ export default function Navbar() {
     const navigate = useNavigate();
     const { auth, logout } = useAuth()
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg py-3">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg fixed-top py-3">
             <div className="container-fluid">
                 <NavLink className="navbar-brand" to="/">
                     <div>
@@ -47,14 +47,24 @@ export default function Navbar() {
                             </ul>
                         </li>
                     </ul>
-                    {}
+                    { }
                     {auth && auth.token ? (
                         <div className="d-flex align-items-center">
-                            <span className="text-light me-3">{(auth.user && (auth.user.username || auth.user.email)) || 'User'}</span>
+                            <div>
+                                <button className="btn btn-outline-light" onClick={() => navigate("/addrecipe")}>Add you own recipe !</button>
+                            </div>
+                            <span className="text-light me-3"> Welcome! {(auth.user && (auth.user.username || auth.user.email)) || 'User'}</span>
                             <button type="button" className="btn btn-outline-light" onClick={() => { logout(); navigate('/'); }}>Logout</button>
+
                         </div>
+
+
+
                     ) : (
-                        <button type="button" className="btn btn-primary" onClick={() => navigate('/login')}>Login</button>
+                        <div>
+                            <span className="text-light me-3">Please login to add your Recipes! </span>
+                            <button type="button" className="btn btn-primary" onClick={() => navigate('/login')}>Login</button>
+                        </div>
                     )}
 
                 </div>

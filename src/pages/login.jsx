@@ -4,39 +4,53 @@ import '../login.css'
 import { useAuth } from '../context/AuthContext.jsx'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 function Login() {
-    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const { login } = useAuth()
+    
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
         try {
-            const res = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+            const res = await fetch("http://127.0.0.1:8000/api/token/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
+                    
+                    
+
                 },
                 body: JSON.stringify({
-                    email,
-                    password
+                    username: username,
+                    password: password
                 })
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                // update auth context (also persists to localStorage)
-                login(data.token, data.user || { email })
-                toast.success("Logged in successfully!!")
-                // redirect
+
+                localStorage.setItem("access", data.access);
+                localStorage.setItem("refresh", data.refresh);
+
+                
+                login(data.access, { username });
+
+                toast.success("Logged in successfully!!");
+
+                setLoading(false)
                 navigate("/");
             } else {
                 toast.error(data.error || "Invalid credentials");
+                setLoading(false)
             }
 
         } catch (err) {
             console.error("Login error:", err);
             toast.error("Oops! Something went wrong");
+            setLoading(false)
         }
     };
 
@@ -118,8 +132,8 @@ function Login() {
                 <form onSubmit={handleSubmit}>
                     <h1 className="h3 mb-3 fw-normal">Please log in</h1>
                     <div className="form-floating">
-                        <input name="username" type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput" placeholder="Enter your username" />
-                        <label htmlFor="floatingInput">Email</label>
+                        <input name="username" type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} id="floatingInput" placeholder="Enter your username" />
+                        <label htmlFor="floatingInput">Username</label>
                     </div>
                     <div className="form-floating">
                         <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="floatingPassword" placeholder="Password" />
@@ -132,7 +146,7 @@ function Login() {
                     <div>
                         Not registered? <a href="/register">Create an account</a>
                     </div>
-                    <button className="btn btn-primary w-100 py-2" type="submit">Log in</button>
+                    <button className="btn btn-primary w-100 py-2" type="submit" disabled={loading}>{loading ? "Logging in..." : "Log In"}</button>
                     <p className="mt-5 mb-3 text-body-secondary">© 2025–2025</p>
                 </form>
             </main>

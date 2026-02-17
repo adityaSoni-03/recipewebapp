@@ -31,7 +31,7 @@ const RegisterPage = () => {
                 // set auth and navigate to login (or home)
                 
                 toast.success("Registration successfull! please login now")
-                navigate("/login");
+                
             } else {
                 toast.error(data.error || "Registration failed");
             }

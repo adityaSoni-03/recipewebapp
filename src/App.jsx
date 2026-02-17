@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/login.jsx'
 import Recipe from './pages/recipes.jsx'
 import RegisterPage from './pages/register.jsx';
-
+import AddRecipe from './pages/addRecipe.jsx';
 function App() {
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
           <Route path="/recipes/:id" element={< Recipe/>} />
           <Route path="*" element={<h1>404 Page Not Found</h1>} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route path='/addrecipe' element={<AddRecipe />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -23,18 +23,20 @@ function Home() {
         })
             .then(res => res.json())
             .then(data => {
-
+                let list = [];
 
                 if (Array.isArray(data)) {
-                    setRecipes(data);
+                    list = data;
                 } else if (data.data && Array.isArray(data.data)) {
-                    setRecipes(data.data);
+                    list = data.data;
                 } else if (data.results && Array.isArray(data.results)) {
-                    setRecipes(data.results);
+                    list = data.results;
                 } else {
-
-                    setRecipes([]);
+                    list = [];
                 }
+
+                // Only keep recipes explicitly marked public
+                setRecipes(list.filter(r => r && r.is_public === true));
             })
             .catch(error => {
                 console.error('Error fetching recipes:', error);
@@ -61,17 +63,26 @@ function Home() {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
                         {filteredRecipes.map((recipe) => (
+                            
                             <div className="col" key={recipe.id}>
                                 <div className="card shadow-sm">
                                     <div>
-                                        <img src={recipe.image} className="card-img-top
-                                        
-                                        " alt="food img" />
+                                        <img
+                                            src={recipe.image}
+                                            className="card-img-top"
+                                            alt="food img"
+                                            style={{
+                                                height: "250px",
+                                                width: "100%",
+                                                objectFit: "cover"
+                                            }}
+                                        />
                                     </div>
 
                                     <div className="card-body">
                                         <h4>{recipe.title}</h4>
                                         <p className="card-text">{recipe.desc}</p>
+                                        <p>Uploaded by- @{recipe.user}</p>
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group">
                                                 <button type="button" className="btn btn-sm btn-outline-secondary" ><Link to={`/recipes/${recipe.id}`} className="text-decoration-none text-dark">Let's cook</Link></button>
